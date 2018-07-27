@@ -5,10 +5,10 @@ import cookie from 'cookie';
 // support parsing an optional "mlflow-csrf-token" cookie, which we will
 // add as an 'X-CSRF-Token' header to all AJAX requests.
 export default function setupCsrf() {
-  const parsedCookie = cookie.parse(document.cookie);
-  const csrfToken = parsedCookie['mlflow-csrf-token'];
   $.ajaxSetup({
     beforeSend: function(xhr) {
+      const parsedCookie = cookie.parse(document.cookie);
+      const csrfToken = parsedCookie['mlflow-csrf-token'];
       if (csrfToken) {
         xhr.setRequestHeader('X-CSRF-Token', csrfToken);
       }
