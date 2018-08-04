@@ -13,9 +13,6 @@ REL_STATIC_DIR = "js/build"
 app = Flask(__name__, static_folder=REL_STATIC_DIR)
 STATIC_DIR = os.path.join(app.root_path, REL_STATIC_DIR)
 
-for http_path, handler, methods in handlers.get_endpoints():
-    app.add_url_rule(http_path, handler.__name__, handler, methods=methods)
-
 
 def _add_static_prefix(route):
     prefix = os.environ.get(STATIC_PREFIX_ENV_VAR)
@@ -50,6 +47,10 @@ def _run_server(file_store_path, default_artifact_root, host, port, workers, sta
                           If left None, the index.html asset will be served from the root path.
     :return: None
     """
+
+    for http_path, handler, methods in handlers.get_endpoints():
+        app.add_url_rule(http_path, handler.__name__, handler, methods=methods)
+
     env_map = {}
     if file_store_path:
         env_map[FILE_STORE_ENV_VAR] = file_store_path
