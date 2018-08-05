@@ -69,11 +69,17 @@ def get_handler(request_class):
 
 
 def handle_errors(f):
-    # try:
-        return f
-    # except Exception as e:
-        # abort(500)
-        # return abort(Response(repr(e)))
+    def handler(**kwargs):
+        try:
+            return f(**kwargs)
+        except Exception as e:
+            exception_string = e.message
+            if not exception_string:
+                exception_string = repr(e)
+            message = 'Unhandled server exception: %s' % exception_string
+            return Response(message, status=500)
+    handler.__name__ = f.__name__
+    return handler
 
 
 def _not_implemented():
@@ -272,7 +278,6 @@ def _get_artifact_repo(run):
     return ArtifactRepository.from_artifact_uri(uri)
 
 
-@handle_errors
 def _get_paths(base_path):
     """
     A service endpoints base path is typically something like /preview/mlflow/experiment.
