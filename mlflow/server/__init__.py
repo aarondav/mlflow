@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, send_from_directory, make_response
+from flask import Flask, send_from_directory, Response
 
 from mlflow.server import handlers
 from mlflow.utils.process import exec_cmd
@@ -40,7 +40,18 @@ def serve():
     return send_from_directory(STATIC_DIR, 'index.html')
 
 
-def _run_server(file_store_path, default_artifact_root, host, port, workers, static_prefix):
+def _wrap_handler_with_debug(handler):
+    def debug_handler():
+        try:
+            return handler()
+        except Exception as e:
+            abort(500)
+            return abort(Response(repr(e)))
+    return debug_handler
+
+
+def _run_server(file_store_path, default_artifact_root, host, port, workers, static_prefix,
+                verbose_internal_errors):
     """
     Run the MLflow server, wrapping it in gunicorn
     :param static_prefix: If set, the index.html asset will be served from the path static_prefix.
@@ -48,8 +59,13 @@ def _run_server(file_store_path, default_artifact_root, host, port, workers, sta
     :return: None
     """
 
+
     for http_path, handler, methods in handlers.get_endpoints():
-        app.add_url_rule(http_path, handler.__name__, handler, methods=methods)
+        name = handler.__name__
+        if verbose_internal_errors:
+            handler = _wrap_handler_with_debug(handler)
+        print(str((http_path, name, handler, methods)))
+        app.add_url_rule(http_path, name, handler, methods=methods)
 
     env_map = {}
     if file_store_path:

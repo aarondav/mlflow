@@ -135,7 +135,7 @@ def ui(file_store, host, port):
     """
     # TODO: We eventually want to disable the write path in this version of the server.
     try:
-        _run_server(file_store, file_store, host, port, 1, None)
+        _run_server(file_store, file_store, host, port, 1, None, verbose_internal_errors=True)
     except ShellCommandException:
         print("Running the mlflow server failed. Please see the logs above for details.",
               file=sys.stderr)
@@ -174,7 +174,10 @@ def _validate_static_prefix(ctx, param, value):  # pylint: disable=unused-argume
               help="Number of gunicorn worker processes to handle requests (default: 4).")
 @click.option("--static-prefix", default=None, callback=_validate_static_prefix,
               help="A prefix which will be prepended to the path of all static paths.")
-def server(file_store, default_artifact_root, host, port, workers, static_prefix):
+@click.option("--verbose-internal-errors", is_flag=True,
+              help="If provided, 500 errors will include the Python exception, to aid debugging")
+def server(file_store, default_artifact_root, host, port, workers, static_prefix,
+           verbose_internal_errors):
     """
     Run the MLflow tracking server.
 
@@ -183,7 +186,8 @@ def server(file_store, default_artifact_root, host, port, workers, static_prefix
     pass --host 0.0.0.0 to listen on all network interfaces (or a specific interface address).
     """
     try:
-        _run_server(file_store, default_artifact_root, host, port, workers, static_prefix)
+        _run_server(file_store, default_artifact_root, host, port, workers, static_prefix,
+                    verbose_internal_errors)
     except ShellCommandException:
         print("Running the mlflow server failed. Please see the logs above for details.",
               file=sys.stderr)
