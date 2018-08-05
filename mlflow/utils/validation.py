@@ -12,6 +12,7 @@ _METRIC_AND_PARAM_NAME_REGEX = re.compile(r"^([\w.-]*[\w-][\w.-]*)(/[\w.-]*[\w-]
 # Regex for valid run IDs: must be a 32-character hex string.
 _RUN_ID_REGEX = re.compile(r"^[0-9a-f]{32}$")
 
+
 def _validate_metric_name(name):
     """Check that `name` is a valid metric name and raise an exception if it isn't."""
     if _METRIC_AND_PARAM_NAME_REGEX.match(name) is None:
