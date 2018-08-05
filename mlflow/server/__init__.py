@@ -62,8 +62,6 @@ def _run_server(file_store_path, default_artifact_root, host, port, workers, sta
 
     for http_path, handler, methods in handlers.get_endpoints():
         name = handler.__name__
-        if verbose_internal_errors:
-            handler = _wrap_handler_with_debug(handler)
         print(str((http_path, name, handler, methods)))
         app.add_url_rule(http_path, name, handler, methods=methods)
 

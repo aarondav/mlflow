@@ -4,7 +4,7 @@ import os
 import re
 import six
 
-from flask import Response, request, send_file
+from flask import Response, request, send_file, abort
 from google.protobuf.json_format import MessageToJson, ParseDict
 from querystring_parser import parser
 
@@ -68,12 +68,21 @@ def get_handler(request_class):
     return HANDLERS.get(request_class, _not_implemented)
 
 
+def handle_errors(f):
+    # try:
+        return f
+    # except Exception as e:
+        # abort(500)
+        # return abort(Response(repr(e)))
+
+
 def _not_implemented():
     response = Response()
     response.status_code = 404
     return response
 
 
+@handle_errors
 def _create_experiment():
     request_message = _get_request_message(CreateExperiment())
     experiment_id = _get_store().create_experiment(request_message.name)
@@ -84,6 +93,7 @@ def _create_experiment():
     return response
 
 
+@handle_errors
 def _get_experiment():
     request_message = _get_request_message(GetExperiment(), from_get=True)
     response_message = GetExperiment.Response()
@@ -96,6 +106,7 @@ def _get_experiment():
     return response
 
 
+@handle_errors
 def _create_run():
     request_message = _get_request_message(CreateRun())
 
@@ -118,6 +129,7 @@ def _create_run():
     return response
 
 
+@handle_errors
 def _update_run():
     request_message = _get_request_message(UpdateRun())
     updated_info = _get_store().update_run_info(request_message.run_uuid, request_message.status,
@@ -128,6 +140,7 @@ def _update_run():
     return response
 
 
+@handle_errors
 def _log_metric():
     request_message = _get_request_message(LogMetric())
     metric = Metric(request_message.key, request_message.value, request_message.timestamp)
@@ -138,6 +151,7 @@ def _log_metric():
     return response
 
 
+@handle_errors
 def _log_param():
     request_message = _get_request_message(LogParam())
     param = Param(request_message.key, request_message.value)
@@ -148,6 +162,7 @@ def _log_param():
     return response
 
 
+@handle_errors
 def _get_run():
     request_message = _get_request_message(GetRun(), from_get=True)
     response_message = GetRun.Response()
@@ -157,6 +172,7 @@ def _get_run():
     return response
 
 
+@handle_errors
 def _search_runs():
     request_message = _get_request_message(SearchRuns(), from_get=True)
     response_message = SearchRuns.Response()
@@ -168,6 +184,7 @@ def _search_runs():
     return response
 
 
+@handle_errors
 def _list_artifacts():
     request_message = _get_request_message(ListArtifacts(), from_get=True)
     response_message = ListArtifacts.Response()
@@ -187,6 +204,7 @@ def _list_artifacts():
 _TEXT_EXTENSIONS = ['txt', 'yaml', 'json', 'js', 'py', 'csv', 'md', 'rst', 'MLmodel', 'MLproject']
 
 
+@handle_errors
 def _get_artifact():
     request_message = _get_request_message(GetArtifact(), from_get=True)
     run = _get_store().get_run(request_message.run_uuid)
@@ -198,6 +216,7 @@ def _get_artifact():
         return send_file(filename)
 
 
+@handle_errors
 def _get_metric_history():
     request_message = _get_request_message(GetMetricHistory(), from_get=True)
     response_message = GetMetricHistory.Response()
@@ -209,6 +228,7 @@ def _get_metric_history():
     return response
 
 
+@handle_errors
 def _get_metric():
     request_message = _get_request_message(GetMetric(), from_get=True)
     response_message = GetMetric.Response()
@@ -219,6 +239,7 @@ def _get_metric():
     return response
 
 
+@handle_errors
 def _get_param():
     request_message = _get_request_message(GetParam(), from_get=True)
     response_message = GetParam.Response()
@@ -229,6 +250,7 @@ def _get_param():
     return response
 
 
+@handle_errors
 def _list_experiments():
     response_message = ListExperiments.Response()
     experiment_entities = _get_store().list_experiments()
@@ -238,6 +260,7 @@ def _list_experiments():
     return response
 
 
+@handle_errors
 def _get_artifact_repo(run):
     if run.info.artifact_uri:
         return ArtifactRepository.from_artifact_uri(run.info.artifact_uri)
@@ -249,6 +272,7 @@ def _get_artifact_repo(run):
     return ArtifactRepository.from_artifact_uri(uri)
 
 
+@handle_errors
 def _get_paths(base_path):
     """
     A service endpoints base path is typically something like /preview/mlflow/experiment.
