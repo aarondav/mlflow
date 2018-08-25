@@ -25,11 +25,11 @@ public class HttpCaller {
     private HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
     private HttpClient httpClient ;
 
-    public HttpCaller(String apiUri) throws Exception {
+    public HttpCaller(String apiUri) {
         this(apiUri, null, null);
     }
 
-    public HttpCaller(String apiUri, String user, String password) throws Exception {
+    public HttpCaller(String apiUri, String user, String password) {
         this.apiUri = apiUri;
         logger.info("apiUri: "+apiUri+" user="+user);
         if (user != null && password != null) {

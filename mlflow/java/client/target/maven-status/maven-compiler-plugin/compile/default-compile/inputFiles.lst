@@ -2,13 +2,16 @@
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/objects/ParameterSearch.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/objects/MetricSearch.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/ApiClient.java
+/Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/settings/DatabricksConfigSettingsProvider.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/HttpServerException.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/com/databricks/api/proto/databricks/Databricks.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/HttpCaller.java
+/Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/MlflowClientBuilder.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/samples/QuickStartDriver.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/api/proto/Service.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/objects/BaseSearch.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/objects/ToProtobufMapper.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/HttpClientException.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/objects/FromProtobufMapper.java
+/Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/settings/ClientSettingsProvider.java
 /Users/aaron/db/mlflow/mlflow/java/client/src/main/java/org/mlflow/client/HttpException.java

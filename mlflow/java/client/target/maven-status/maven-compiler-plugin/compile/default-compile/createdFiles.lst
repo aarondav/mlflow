@@ -105,6 +105,7 @@ org/mlflow/api/proto/Service$FileInfoOrBuilder.class
 org/mlflow/api/proto/Service$UpdateRun$Response$1.class
 com/databricks/api/proto/databricks/Databricks$HttpEndpoint$Builder.class
 org/mlflow/client/HttpException.class
+org/mlflow/client/MlflowClientBuilder.class
 org/mlflow/api/proto/Service$GetParam$Builder.class
 com/databricks/api/proto/databricks/Databricks$ApiVersion$Builder.class
 com/databricks/api/proto/databricks/Databricks$ApiVersion.class
@@ -175,10 +176,12 @@ org/mlflow/api/proto/Service$GetExperiment.class
 org/mlflow/api/proto/Service$Experiment.class
 org/mlflow/api/proto/Service$GetRun.class
 org/mlflow/api/proto/Service$SetTag$Response.class
+org/mlflow/client/settings/DatabricksConfigSettingsProvider.class
 org/mlflow/api/proto/Service$RunTag$Builder.class
 org/mlflow/api/proto/Service$LogParam$1.class
 com/databricks/api/proto/databricks/Databricks$HttpEndpoint$1.class
 org/mlflow/api/proto/Service$RunTagOrBuilder.class
+org/mlflow/client/settings/ClientSettingsProvider.class
 org/mlflow/api/proto/Service$ListArtifacts$Builder.class
 org/mlflow/api/proto/Service$Experiment$1.class
 org/mlflow/api/proto/Service$GetMetric.class
