@@ -31,6 +31,7 @@ org/mlflow/api/proto/Service$GetMetricHistory.class
 org/mlflow/api/proto/Service$LogParam$Response$1.class
 org/mlflow/api/proto/Service$Param$Builder.class
 org/mlflow/api/proto/Service$Param.class
+org/mlflow/client/settings/MlflowHostCreds.class
 org/mlflow/api/proto/Service$SetTag.class
 org/mlflow/client/HttpServerException.class
 org/mlflow/api/proto/Service$ParameterSearchExpression$ClauseCase.class
@@ -62,6 +63,7 @@ org/mlflow/api/proto/Service$RunInfo$Builder.class
 org/mlflow/api/proto/Service$SearchRunsOrBuilder.class
 com/databricks/api/proto/databricks/Databricks$DocumentationMetadata$1.class
 org/mlflow/api/proto/Service$GetExperiment$Response$Builder.class
+org/mlflow/client/settings/DatabricksDynamicHostCredsProvider.class
 org/mlflow/api/proto/Service$SetTag$Response$Builder.class
 org/mlflow/api/proto/Service$RestoreExperiment$1.class
 org/mlflow/api/proto/Service$LogMetric$Response$1.class
@@ -76,6 +78,7 @@ org/mlflow/api/proto/Service$GetParamOrBuilder.class
 com/databricks/api/proto/databricks/Databricks$ApiVersionOrBuilder.class
 org/mlflow/api/proto/Service$SearchRuns$Builder.class
 com/databricks/api/proto/databricks/Databricks$DatabricksRpcOptions.class
+org/mlflow/client/settings/BasicMlflowHostCreds.class
 org/mlflow/api/proto/Service$ListExperiments$Response$Builder.class
 org/mlflow/api/proto/Service$GetExperiment$ResponseOrBuilder.class
 org/mlflow/api/proto/Service$CreateRunOrBuilder.class
@@ -86,6 +89,7 @@ org/mlflow/api/proto/Service$FileInfo$1.class
 org/mlflow/api/proto/Service$CreateRun$Response.class
 org/mlflow/api/proto/Service$SetTag$Builder.class
 org/mlflow/api/proto/Service$CreateRun$Response$1.class
+org/ini4j/PyIniConfigParserUtils.class
 org/mlflow/api/proto/Service$GetParam$Response$Builder.class
 org/mlflow/api/proto/Service$RunStatus.class
 org/mlflow/api/proto/Service$GetParam$1.class
@@ -105,7 +109,6 @@ org/mlflow/api/proto/Service$FileInfoOrBuilder.class
 org/mlflow/api/proto/Service$UpdateRun$Response$1.class
 com/databricks/api/proto/databricks/Databricks$HttpEndpoint$Builder.class
 org/mlflow/client/HttpException.class
-org/mlflow/client/MlflowClientBuilder.class
 org/mlflow/api/proto/Service$GetParam$Builder.class
 com/databricks/api/proto/databricks/Databricks$ApiVersion$Builder.class
 com/databricks/api/proto/databricks/Databricks$ApiVersion.class
@@ -132,6 +135,7 @@ org/mlflow/api/proto/Service$GetParam.class
 org/mlflow/api/proto/Service$2.class
 com/databricks/api/proto/databricks/Databricks$RateLimit$1.class
 org/mlflow/api/proto/Service$DeleteExperiment$Builder.class
+org/mlflow/client/settings/MlflowHostCredsProvider.class
 org/mlflow/api/proto/Service$LogParam$Response$Builder.class
 org/mlflow/api/proto/Service$ListArtifacts$Response.class
 org/mlflow/api/proto/Service$CreateRun$Builder.class
@@ -141,6 +145,7 @@ org/mlflow/api/proto/Service$SetTag$Response$1.class
 com/databricks/api/proto/databricks/Databricks.class
 org/mlflow/api/proto/Service$UpdateRun$1.class
 org/mlflow/api/proto/Service$GetExperimentOrBuilder.class
+org/mlflow/client/settings/HostCredsProviderChain.class
 org/mlflow/api/proto/Service$RunTag.class
 org/mlflow/api/proto/Service$SearchRuns$1.class
 org/mlflow/api/proto/Service$FloatClause$1.class
@@ -176,12 +181,10 @@ org/mlflow/api/proto/Service$GetExperiment.class
 org/mlflow/api/proto/Service$Experiment.class
 org/mlflow/api/proto/Service$GetRun.class
 org/mlflow/api/proto/Service$SetTag$Response.class
-org/mlflow/client/settings/DatabricksConfigSettingsProvider.class
 org/mlflow/api/proto/Service$RunTag$Builder.class
 org/mlflow/api/proto/Service$LogParam$1.class
 com/databricks/api/proto/databricks/Databricks$HttpEndpoint$1.class
 org/mlflow/api/proto/Service$RunTagOrBuilder.class
-org/mlflow/client/settings/ClientSettingsProvider.class
 org/mlflow/api/proto/Service$ListArtifacts$Builder.class
 org/mlflow/api/proto/Service$Experiment$1.class
 org/mlflow/api/proto/Service$GetMetric.class
@@ -189,6 +192,7 @@ org/mlflow/api/proto/Service$SearchExpression$Builder.class
 org/mlflow/api/proto/Service$ExperimentOrBuilder.class
 org/mlflow/api/proto/Service$GetMetricHistory$Response.class
 org/mlflow/api/proto/Service$ListArtifactsOrBuilder.class
+org/mlflow/client/MlflowClientException.class
 org/mlflow/api/proto/Service$GetMetricHistoryOrBuilder.class
 org/mlflow/api/proto/Service$GetRun$ResponseOrBuilder.class
 org/mlflow/api/proto/Service$Param$1.class
@@ -229,6 +233,7 @@ org/mlflow/api/proto/Service$GetMetricOrBuilder.class
 org/mlflow/api/proto/Service$LogMetricOrBuilder.class
 org/mlflow/client/ApiClient.class
 com/databricks/api/proto/databricks/Databricks$ErrorCode.class
+org/mlflow/client/settings/DatabricksConfigHostCredsProvier.class
 com/databricks/api/proto/databricks/Databricks$HttpEndpointOrBuilder.class
 org/mlflow/api/proto/Service$LogMetric$ResponseOrBuilder.class
 org/mlflow/api/proto/Service$RunInfoOrBuilder.class
