@@ -32,16 +32,16 @@ public class ApiClient {
   public static ApiClient fromTrackingUri(String trackingUri) {
     URI uri = URI.create(trackingUri);
     MlflowHostCredsProvider provider;
-    if ("databricks".equals(uri.getScheme())) {
-      MlflowHostCredsProvider profileProvider = new DatabricksConfigHostCredsProvier(uri.getHost());
+    if (trackingUri.equals("databricks")) {
+      MlflowHostCredsProvider profileProvider = new DatabricksConfigHostCredsProvier();
       MlflowHostCredsProvider dynamicProvider = DatabricksDynamicHostCredsProvider.createIfAvailable();
       if (dynamicProvider != null) {
         provider = new HostCredsProviderChain(dynamicProvider, profileProvider);
       } else {
         provider = profileProvider;
       }
-    } else if (trackingUri.equals("databricks")) {
-      provider = new DatabricksConfigHostCredsProvier();
+    } else if ("databricks".equals(uri.getScheme())) {
+      provider = new DatabricksConfigHostCredsProvier(uri.getHost());
     } else if ("http".equals(uri.getScheme()) || "https".equals(uri.getScheme())) {
       provider = new BasicMlflowHostCreds(trackingUri);
     } else if (uri.getScheme() == null || "file".equals(uri.getScheme())) {
