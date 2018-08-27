@@ -34,7 +34,7 @@ class HttpCaller {
     this.hostCredsProvider = hostCredsProvider;
   }
 
-  public String get(String path) throws Exception {
+  String get(String path) throws Exception {
     logger.debug("Sending GET " + path);
     HttpGet request = new HttpGet();
     fillRequestSettings(request, path);
@@ -46,7 +46,7 @@ class HttpCaller {
   }
 
   // TODO(aaron) Convert to InputStream.
-  public byte[] getAsBytes(String path) throws Exception {
+  byte[] getAsBytes(String path) throws Exception {
     logger.debug("Sending GET " + path);
     HttpGet request = new HttpGet();
     fillRequestSettings(request, path);
@@ -57,7 +57,7 @@ class HttpCaller {
     return bytes;
   }
 
-  public String post(String path, String json) throws Exception {
+  String post(String path, String json) throws Exception {
     logger.debug("Sending POST " + path + ": " + json);
     HttpPost request = new HttpPost();
     fillRequestSettings(request, path);

@@ -162,7 +162,6 @@ org/mlflow/api/proto/Service$MetricSearchExpression$ClauseCase.class
 org/mlflow/api/proto/Service$RestoreExperiment$Builder.class
 com/databricks/api/proto/databricks/Databricks$DatabricksRpcOptionsOrBuilder.class
 org/mlflow/api/proto/Service$DeleteExperiment$1.class
-org/mlflow/client/objects/BaseSearch.class
 org/mlflow/api/proto/Service$UpdateRunOrBuilder.class
 org/mlflow/api/proto/Service$StringClause$1.class
 org/mlflow/api/proto/Service$FloatClause.class
@@ -208,7 +207,6 @@ com/databricks/api/proto/databricks/Databricks$ApiVersion$1.class
 org/mlflow/api/proto/Service$SetTag$ResponseOrBuilder.class
 org/mlflow/api/proto/Service$FloatClause$Builder.class
 org/mlflow/api/proto/Service$CreateExperimentOrBuilder.class
-org/mlflow/client/objects/MetricSearch.class
 org/mlflow/api/proto/Service$CreateRun$ResponseOrBuilder.class
 org/mlflow/api/proto/Service$SearchRuns$Response$Builder.class
 com/databricks/api/proto/databricks/Databricks$DocumentationMetadata.class
@@ -224,7 +222,6 @@ org/mlflow/api/proto/Service$UpdateRun$ResponseOrBuilder.class
 org/mlflow/api/proto/Service$StringClauseOrBuilder.class
 org/mlflow/api/proto/Service$Experiment$Builder.class
 org/mlflow/api/proto/Service$RunData.class
-org/mlflow/client/objects/ParameterSearch.class
 com/databricks/api/proto/databricks/Databricks$ErrorCode$1.class
 org/mlflow/api/proto/Service$MetricOrBuilder.class
 org/mlflow/api/proto/Service$LogMetric$Response$Builder.class

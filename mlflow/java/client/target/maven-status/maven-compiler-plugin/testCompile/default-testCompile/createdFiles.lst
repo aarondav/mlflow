@@ -1,7 +1,6 @@
-org/mlflow/client/BaseTest.class
-org/mlflow/client/MultiThreadedTest.class
-org/mlflow/client/PythonScikitLearnTest.class
+org/mlflow/client/TestClientProvider.class
+org/mlflow/client/ApiClientTest.class
 org/mlflow/client/TestShared.class
 org/mlflow/client/HttpTest.class
-org/ini4j/ApiClientTest.class
+org/mlflow/client/TestClientProvider$1.class
 org/mlflow/client/TestUtils.class
