@@ -32,17 +32,7 @@ public class ApiClient {
   public static ApiClient fromTrackingUri(String trackingUri) {
     URI uri = URI.create(trackingUri);
     MlflowHostCredsProvider provider;
-    if (trackingUri.equals("databricks")) {
-      MlflowHostCredsProvider profileProvider = new DatabricksConfigHostCredsProvier();
-      MlflowHostCredsProvider dynamicProvider = DatabricksDynamicHostCredsProvider.createIfAvailable();
-      if (dynamicProvider != null) {
-        provider = new HostCredsProviderChain(dynamicProvider, profileProvider);
-      } else {
-        provider = profileProvider;
-      }
-    } else if ("databricks".equals(uri.getScheme())) {
-      provider = new DatabricksConfigHostCredsProvier(uri.getHost());
-    } else if ("http".equals(uri.getScheme()) || "https".equals(uri.getScheme())) {
+     if ("http".equals(uri.getScheme()) || "https".equals(uri.getScheme())) {
       provider = new BasicMlflowHostCreds(trackingUri);
     } else if (uri.getScheme() == null || "file".equals(uri.getScheme())) {
       throw new IllegalArgumentException("Java Client currently does not support" +
