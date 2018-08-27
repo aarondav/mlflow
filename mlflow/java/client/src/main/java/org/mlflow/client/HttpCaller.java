@@ -13,6 +13,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+
 import org.mlflow.client.settings.MlflowHostCreds;
 import org.mlflow.client.settings.MlflowHostCredsProvider;
 
