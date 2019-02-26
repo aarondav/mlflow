@@ -76,6 +76,8 @@ def test_get_experiment_id():
         assert exp_id is not None
         mlflow.set_experiment(name)
         assert _get_experiment_id() == exp_id
+        mlflow.set_experiment(None)
+        assert _get_experiment_id() == Experiment.DEFAULT_EXPERIMENT_ID
 
 
 @pytest.fixture
@@ -129,46 +131,35 @@ def test_start_run_defaults(empty_active_run_stack):
 
 def test_start_run_defaults_databricks_notebook(empty_active_run_stack):
 
-    mock_experiment_id = mock.Mock()
-    experiment_id_patch = mock.patch(
-        "mlflow.tracking.fluent._get_experiment_id", return_value=mock_experiment_id
-    )
-    databricks_notebook_patch = mock.patch(
-        "mlflow.tracking.fluent.is_in_databricks_notebook", return_value=True
-    )
-    mock_source_version = mock.Mock()
-    source_version_patch = mock.patch(
-        "mlflow.tracking.fluent._get_source_version", return_value=mock_source_version
-    )
-    mock_notebook_id = mock.Mock()
-    notebook_id_patch = mock.patch(
-        "mlflow.tracking.fluent.get_notebook_id", return_value=mock_notebook_id
-    )
-    mock_notebook_path = mock.Mock()
-    notebook_path_patch = mock.patch(
-        "mlflow.tracking.fluent.get_notebook_path", return_value=mock_notebook_path
-    )
-    mock_webapp_url = mock.Mock()
-    webapp_url_patch = mock.patch(
-        "mlflow.tracking.fluent.get_webapp_url", return_value=mock_webapp_url
+    def get_extra_context(context_key):
+        if context_key == 'aclPathOfAclRoot':
+            return '/workspace/123'
+        elif context_key == 'notebook_path':
+            return 'notebook_path'
+        elif context_key == 'api_url':
+            return 'my_api_path'
+        else:
+            raise Exception('Unknown context key: %s' % context_key)
+
+    get_extra_context_patch = mock.patch(
+        "mlflow.utils.databricks_utils._get_extra_context", side_effect=get_extra_context
     )
 
     expected_tags = {
-        mlflow_tags.MLFLOW_DATABRICKS_NOTEBOOK_ID: mock_notebook_id,
-        mlflow_tags.MLFLOW_DATABRICKS_NOTEBOOK_PATH: mock_notebook_path,
-        mlflow_tags.MLFLOW_DATABRICKS_WEBAPP_URL: mock_webapp_url
+        mlflow_tags.MLFLOW_DATABRICKS_NOTEBOOK_ID: "123",
+        mlflow_tags.MLFLOW_DATABRICKS_NOTEBOOK_PATH: "notebook_path",
+        mlflow_tags.MLFLOW_DATABRICKS_WEBAPP_URL: "my_api_path",
     }
 
     create_run_patch = mock.patch.object(MlflowClient, "create_run")
 
-    with experiment_id_patch, databricks_notebook_patch, source_version_patch, \
-            notebook_id_patch, notebook_path_patch, webapp_url_patch, create_run_patch:
+    with get_extra_context_patch, create_run_patch:
         active_run = start_run()
         MlflowClient.create_run.assert_called_once_with(
-            experiment_id=mock_experiment_id,
+            experiment_id=0,
             run_name=None,
-            source_name=mock_notebook_path,
-            source_version=mock_source_version,
+            source_name='notebook_path',
+            source_version=None,
             entry_point_name=None,
             source_type=SourceType.NOTEBOOK,
             tags=expected_tags,

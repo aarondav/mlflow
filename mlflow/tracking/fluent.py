@@ -42,8 +42,13 @@ def set_experiment(experiment_name):
     Set given experiment as active experiment. If experiment does not exist, create an experiment
     with provided name.
 
-    :param experiment_name: Name of experiment to be activated.
+    :param experiment_name: Name of experiment to be activated, or None to unset active experiment.
     """
+    global _active_experiment_id
+    if experiment_name is None:
+        _active_experiment_id = None
+        return
+
     client = MlflowClient()
     experiment = client.get_experiment_by_name(experiment_name)
     exp_id = experiment.experiment_id if experiment else None
@@ -55,7 +60,6 @@ def set_experiment(experiment_name):
             "Cannot set a deleted experiment '%s' as the active experiment."
             " You can restore the experiment, or permanently delete the "
             " experiment to create a new one." % experiment.name)
-    global _active_experiment_id
     _active_experiment_id = exp_id
 
 
