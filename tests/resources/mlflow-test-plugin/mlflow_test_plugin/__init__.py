@@ -15,3 +15,6 @@ class PluginFileStore(FileStore):
 
 class PluginLocalArtifactRepository(LocalArtifactRepository):
     """LocalArtifactRepository provided through plugin system"""
+    def __init__(self, artifact_uri=None):
+        self.is_plugin = True
+        super(PluginLocalArtifactRepository, self).__init__(artifact_uri)
