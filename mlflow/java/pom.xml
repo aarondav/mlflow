@@ -56,7 +56,11 @@
   </distributionManagement>
 
   <properties>
+<<<<<<< HEAD
     <mlflow-version>1.7.2-SNAPSHOT</mlflow-version>
+=======
+    <mlflow-version>1.7.0</mlflow-version>
+>>>>>>> Update MLflow version to 1.7.0
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <scala.version>2.11.12</scala.version>
