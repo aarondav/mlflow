@@ -10,6 +10,7 @@ MLflow 1.7.1 is a patch release containing bug fixes and small changes:
 
 Other bugfixes and doc updates (#2595, @mparkhe; #2567, @jdlesage)
 
+=======
 1.7.0 (2020-03-02)
 ------------------
 MLflow 1.7.0 includes several major features and improvements, and some notable breaking changes:
