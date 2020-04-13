@@ -24,10 +24,10 @@ jobs:
       run: |
         INSTALL_SMALL_PYTHON_DEPS=true INSTALL_LARGE_PYTHON_DEPS=true source ./travis/install-common-deps.sh
         pip install -r ./travis/lint-requirements.txt
-    - name: Lint with flake8
+    - name: Run lint
       run: |
         ./lint.sh
-    - name: Test with pytest
+    - name: Run tests
       run: |
         pip install pytest
         pytest
