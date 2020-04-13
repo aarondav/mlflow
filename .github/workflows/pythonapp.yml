@@ -10,8 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +21,24 @@ jobs:
         python-version: 3.6
     - name: Install dependencies
       run: |
-        INSTALL_SMALL_PYTHON_DEPS=true INSTALL_LARGE_PYTHON_DEPS=true source ./travis/install-common-deps.sh
         pip install -r ./travis/lint-requirements.txt
     - name: Run lint
       run: |
         ./lint.sh
+
+
+  python-small:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+    - name: Install dependencies
+      run: |
+        INSTALL_SMALL_PYTHON_DEPS=true source ./travis/install-common-deps.sh
     - name: Run tests
       run: |
-        pip install pytest
-        pytest
+        ./travis/stage-python3.sh
+~
