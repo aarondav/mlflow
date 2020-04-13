@@ -2,15 +2,11 @@
 
 set -ex
 sudo mkdir -p /travis-install
-sudo chown travis /travis-install
+#sudo chown travis /travis-install
 # (The conda installation steps below are taken from http://conda.pydata.org/docs/travis.html)
 # We do this conditionally because it saves us some downloading if the
 # version is the same.
-if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-  wget https://repo.anaconda.com/miniconda/Miniconda2-latest-Linux-x86_64.sh -O /travis-install/miniconda.sh;
-else
-  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /travis-install/miniconda.sh;
-fi
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /travis-install/miniconda.sh;
 
 bash /travis-install/miniconda.sh -b -p $HOME/miniconda
 export PATH="$HOME/miniconda/bin:$PATH"
