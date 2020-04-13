@@ -8,7 +8,7 @@ sudo mkdir -p /travis-install
 # version is the same.
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 
-bash /travis-install/miniconda.sh -b -p $HOME/miniconda
+bash miniconda.sh -b -p $HOME/miniconda
 export PATH="$HOME/miniconda/bin:$PATH"
 hash -r
 conda config --set always_yes yes --set changeps1 no
