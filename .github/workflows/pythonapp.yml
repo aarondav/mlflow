@@ -21,8 +21,8 @@ jobs:
         python-version: 3.6
     - name: Install dependencies
       run: |
+        INSTALL_LARGE_PYTHON_DEPS=true INSTALL_SMALL_PYTHON_DEPS=true source ./travis/install-common-deps.sh
         pip install -r ./travis/lint-requirements.txt
-        INSTALL_SMALL_PYTHON_DEPS=true source ./travis/install-common-deps.sh
     - name: Run lint
       run: |
         source activate test-environment
