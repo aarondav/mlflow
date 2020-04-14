@@ -2,7 +2,9 @@
 
 set -ex
 sudo mkdir -p /travis-install
-#sudo chown travis /travis-install
+if [[ -z $GITHUB_WORKFLOW ]]; then
+  sudo chown travis /travis-install
+fi
 # (The conda installation steps below are taken from http://conda.pydata.org/docs/travis.html)
 # We do this conditionally because it saves us some downloading if the
 # version is the same.
@@ -38,7 +40,9 @@ fi
 pip install .
 export MLFLOW_HOME=$(pwd)
 # Remove boto config present in Travis VMs (https://github.com/travis-ci/travis-ci/issues/7940)
-#sudo rm -f /etc/boto.cfg
+if [[ -z $GITHUB_WORKFLOW ]]; then
+  sudo rm -f /etc/boto.cfg
+fi
 # Print current environment info
 pip list
 which mlflow

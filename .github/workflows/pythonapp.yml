@@ -40,9 +40,11 @@ jobs:
         python-version: 3.6
     - name: Install dependencies
       run: |
+        export GITHUB_WORKFLOW=1
         INSTALL_SMALL_PYTHON_DEPS=true source ./travis/install-common-deps.sh
     - name: Run tests
       run: |
+        export GITHUB_WORKFLOW=1
         export PATH="$HOME/miniconda/bin:$PATH"
         source activate test-environment
         ./travis/run-small-python-tests.sh
