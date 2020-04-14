@@ -69,6 +69,7 @@ def test_docker_project_execution(
     ("databricks://some-profile", "-e MLFLOW_TRACKING_URI=databricks ")
 ])
 @mock.patch('databricks_cli.configure.provider.ProfileConfigProvider')
+@pytest.mark.large
 def test_docker_project_tracking_uri_propagation(
         ProfileConfigProvider, tmpdir, tracking_uri,
         expected_command_segment, docker_example_base_image):  # pylint: disable=unused-argument
