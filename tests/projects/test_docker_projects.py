@@ -26,6 +26,7 @@ def _build_uri(base_uri, subdirectory):
 
 
 @pytest.mark.parametrize("use_start_run", map(str, [0, 1]))
+@pytest.mark.large
 def test_docker_project_execution(
         use_start_run,
         tmpdir, docker_example_base_image):  # pylint: disable=unused-argument
