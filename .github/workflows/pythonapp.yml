@@ -25,6 +25,7 @@ jobs:
         pip install -r ./travis/lint-requirements.txt
     - name: Run lint
       run: |
+        export PATH="$HOME/miniconda/bin:$PATH"
         source activate test-environment
         ./lint.sh
 
@@ -42,6 +43,7 @@ jobs:
         INSTALL_SMALL_PYTHON_DEPS=true source ./travis/install-common-deps.sh
     - name: Run tests
       run: |
+        export PATH="$HOME/miniconda/bin:$PATH"
         source activate test-environment
         ./travis/run-small-python-tests.sh
         ./test-generate-protos.sh
@@ -60,6 +62,7 @@ jobs:
         INSTALL_LARGE_PYTHON_DEPS=true source ./travis/install-common-deps.sh
     - name: Run tests
       run: |
+        export PATH="$HOME/miniconda/bin:$PATH"
         ./travis/run-large-python-tests.sh
         ./travis/test-anaconda-compatibility.sh "anaconda3:2020.02"
         ./travis/test-anaconda-compatibility.sh "anaconda3:2019.03"
