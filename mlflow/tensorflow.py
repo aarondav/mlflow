@@ -251,17 +251,20 @@ def load_model(model_uri, tf_sess=None):
              For TensorFlow >= 2.0.0, A callable graph (tf.function) that takes inputs and
              returns inferences.
 
-    >>> import mlflow.tensorflow
-    >>> import tensorflow as tf
-    >>> tf_graph = tf.Graph()
-    >>> tf_sess = tf.Session(graph=tf_graph)
-    >>> with tf_graph.as_default():
-    >>>     signature_definition = mlflow.tensorflow.load_model(model_uri="model_uri",
-    >>>                            tf_sess=tf_sess)
-    >>>     input_tensors = [tf_graph.get_tensor_by_name(input_signature.name)
-    >>>                      for _, input_signature in signature_definition.inputs.items()]
-    >>>     output_tensors = [tf_graph.get_tensor_by_name(output_signature.name)
-    >>>                       for _, output_signature in signature_definition.outputs.items()]
+    .. code-block:: python
+        :caption: Example
+
+        import mlflow.tensorflow
+        import tensorflow as tf
+        tf_graph = tf.Graph()
+        tf_sess = tf.Session(graph=tf_graph)
+        with tf_graph.as_default():
+            signature_definition = mlflow.tensorflow.load_model(model_uri="model_uri",
+                                    tf_sess=tf_sess)
+            input_tensors = [tf_graph.get_tensor_by_name(input_signature.name)
+                                for _, input_signature in signature_definition.inputs.items()]
+            output_tensors = [tf_graph.get_tensor_by_name(output_signature.name)
+                                for _, output_signature in signature_definition.outputs.items()]
     """
 
     if LooseVersion(tensorflow.__version__) < LooseVersion('2.0.0'):
@@ -482,8 +485,6 @@ class __MLflowTfKerasCallback(Callback):
         sum_list = []
         self.model.summary(print_fn=sum_list.append)
         summary = '\n'.join(sum_list)
-        try_mlflow_log(mlflow.set_tag, 'model_summary', summary)
-
         tempdir = tempfile.mkdtemp()
         try:
             summary_file = os.path.join(tempdir, "model_summary.txt")
@@ -522,8 +523,6 @@ class __MLflowTfKeras2Callback(Callback):
         sum_list = []
         self.model.summary(print_fn=sum_list.append)
         summary = '\n'.join(sum_list)
-        try_mlflow_log(mlflow.set_tag, 'model_summary', summary)
-
         tempdir = tempfile.mkdtemp()
         try:
             summary_file = os.path.join(tempdir, "model_summary.txt")
