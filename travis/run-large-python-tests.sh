@@ -14,7 +14,4 @@ pytest tests --large --ignore=tests/examples --ignore=tests/h2o --ignore=tests/k
   --ignore=tests/gluon_autolog --ignore=tests/xgboost --ignore=tests/lightgbm \
   --ignore=tests/spacy --ignore=tests/spark_autologging --ignore=tests/models
 
-# Run Spark autologging tests
-./travis/test-spark-autologging.sh
-
 test $err = 0
